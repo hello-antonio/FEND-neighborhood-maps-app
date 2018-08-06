@@ -1,0 +1,14 @@
+.App {
+  background-color: #fff;
+}
+
+.flex-align-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  max-width: 320px;
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
