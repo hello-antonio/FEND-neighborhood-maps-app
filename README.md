@@ -35,7 +35,6 @@ The user can filter/search the parks by: location, popularity, co$t of admission
 │   └── star.svg
 ├── index.css
 ├── index.js
-├── LeafletAPI.js
 └── registerServiceWorker.js
 ```
 
