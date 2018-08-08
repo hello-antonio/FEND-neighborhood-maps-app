@@ -72,7 +72,7 @@ service workers
 
 ## One last thing
 
-Thanks to the [Udacity team/instructors/mentors/mates++]() for all the support, knowledge and guidance provided during the cource of the program and for giving me the scholarship, i'm very thankfull for that, promise not to let you down, thank you to the Infinity
+Thanks to the [Udacity team/instructors/mentors/mates++]() for all the support, knowledge and guidance provided during the cource of the program and for giving me the scholarship, i'm very thankfull for that, promise not to let you down, thanks again.
 
 ## Feedback
 
