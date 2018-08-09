@@ -1,0 +1,36 @@
+.neighborhood__filter {
+  margin: 2em auto 1em;
+  width: calc(100% - 2em);
+}
+
+#filter-form {
+  text-align: center;
+}
+
+#filter-form input {
+  height: 48px;
+}
+
+#filter-form input[type=search] {
+  width: calc(100% - 48px);
+  padding: 4px 14px;
+  border: transparent;
+  background-color: #f7f7f7;
+  color: grey;
+  font-size: 1em;
+  box-shadow: 0 2px 12px rgba(129, 199, 132, 0.3);
+  transition: all 0.35s ease;
+}
+
+#filter-form input[type=search]:focus {
+  box-shadow: 0 4px 48px rgba(129, 199, 132, 0.3);
+  border: none;
+  outline: transparent;
+}
+
+#filter-form input[type=submit] {
+  border: transparent;
+  background-color: #81c784;
+  color: #fff;
+  width: 48px;
+}

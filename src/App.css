@@ -1,5 +1,47 @@
-.App {
+.app {
+  display: flex;
+  flex-direction: column;
   background-color: #fff;
+  font-family: 'Roboto', sans-serif;
+}
+
+.app__header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  width: 100%;
+  background-color: #fff;
+  height: 48px;
+  line-height: 48px;
+  z-index: 1010;
+  box-shadow: 0 4px 30px rgba(129, 199, 132, 0.1);
+}
+
+.app__menu-btn {
+  position: absolute;
+  left: 1em;
+}
+
+.app__menu-btn-open{
+  height: 48px;
+  width: 48px;
+  background-color: #81c784;
+  border: none;
+  outline: none;
+  color: #fff;
+  display: block;
+}
+
+.app__title {
+  padding: 0 1em;
+}
+
+.app__logo {
+  font-size: 1em;
+  text-align: center;
+  margin: auto;
+  font-weight: 700;
 }
 
 .flex-align-center {

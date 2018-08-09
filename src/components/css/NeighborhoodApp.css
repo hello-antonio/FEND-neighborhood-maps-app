@@ -1,0 +1,7 @@
+.neighborhood{
+  position: relative;
+  top: 48px;
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 48px);
+}

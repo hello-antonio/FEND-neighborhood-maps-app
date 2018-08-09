@@ -1,4 +1,4 @@
-const FONTS_URL = 'https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700';
+const FONTS_URL = 'https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500';
 export default function loader (){
   return new Promise((resolve, reject)=>{
     const link = document.createElement('link');

@@ -1,0 +1,24 @@
+.neighborhood__list__item {
+  background-color: #fff;
+  transition: all 0.35s ease;
+}
+
+.neighborhood__list__item:focus,
+.neighborhood__list__item:hover {
+  background-color: #f7f7f7;
+}
+
+
+.venue {
+  padding: 1em;
+}
+
+.venue__name {
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.venue__address {
+  font-size: 0.75em;
+  color: #676767;
+}
