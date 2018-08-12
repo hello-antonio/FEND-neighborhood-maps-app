@@ -10,7 +10,8 @@
 
 
 .venue {
-  padding: 1em;
+  padding: 0.5em 1em;
+  display: flex;
 }
 
 .venue__name {
@@ -21,4 +22,19 @@
 .venue__address {
   font-size: 0.75em;
   color: #676767;
+}
+
+.venue__desc {
+  width: calc(100% - 48px);
+}
+.venue__directions {
+  padding: 0 8px 0;
+}
+.venue__icon {
+  width: 48px;
+  height: 48px;
+  background-image: url(../../icons/room.svg);
+  background-repeat: no-repeat;
+  background-position:center;
+  background-size: 24px;
 }

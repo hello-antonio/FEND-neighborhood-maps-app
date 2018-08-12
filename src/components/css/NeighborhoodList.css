@@ -1,7 +1,53 @@
 .neighborhood__list {
-  margin: 1em 0 1em;
+  margin: 1em 0 4em;
 }
 
 .neighborhood__list__container {
   list-style: none;
+}
+
+.neighborhood__list__counter {
+  padding: 0.5em 1em;
+  font-size: 0.75em;
+}
+
+.categories-list {
+  list-style: none;
+  padding: 0.5em 1em;
+  font-size: 0.75em;
+}
+
+.categories-list__item {
+  display: inline-block;
+  padding: 8px;
+  background-color: #eeeeee;
+  border-radius: 8px;
+  margin: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.categories-list__item:focus,
+.categories-list__item:hover {
+  background-color: #e8e0ff;
+}
+
+.categories-filter {
+  width: 96px;
+  font-size: 0.75em;
+  padding: 0.5em 1em;
+  display: flex;
+  height: 48px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.list-filter {
+  width: 48px;
+  height: 48px;
+  background-image: url(../../icons/filter.svg);
+  background-repeat: no-repeat;
+  background-position:center;
+  background-size: 24px;
+  display: block;
 }

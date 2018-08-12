@@ -1,7 +1,37 @@
 #map{
-  order: 1;
-  width: 100%;
   height: 100%;
+  width:100vw;
   background-color: #fafafa;
-  position: fixed;
+  transition: margin-left 0.5s;
+}
+
+@keyframes bounceInDown {
+  0% {
+     transform: translate3d(0,-48px,0);
+  }
+  25% {
+    transform: translate3d(0,0,0);
+  }
+  75% {
+    transform: translate3d(0,-24px,0);
+  }
+  100% {
+    transform: translate3d(0,0,0);
+  }
+}
+
+.bounceInDown {
+  animation-name: bounceInDown;
+  animation-duration: 0.3s;
+}
+
+.leaflet-pane .leaflet-marker-pane{
+  animation-name: bounceInDown;
+  animation-duration: 0.9s;
+  animation-delay: 0.1s;
+  transition: 0.9s;
+}
+
+.marker__desc {
+  max-width: 160px;
 }

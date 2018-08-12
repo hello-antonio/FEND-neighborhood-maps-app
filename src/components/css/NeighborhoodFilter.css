@@ -4,33 +4,40 @@
 }
 
 #filter-form {
+  display: flex;
   text-align: center;
 }
 
-#filter-form input {
+#filter-text-input {
+  width: 100%;
   height: 48px;
-}
-
-#filter-form input[type=search] {
-  width: calc(100% - 48px);
   padding: 4px 14px;
   border: transparent;
-  background-color: #f7f7f7;
+  background-color: #fafafa;
   color: grey;
   font-size: 1em;
-  box-shadow: 0 2px 12px rgba(129, 199, 132, 0.3);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   transition: all 0.35s ease;
 }
 
-#filter-form input[type=search]:focus {
-  box-shadow: 0 4px 48px rgba(129, 199, 132, 0.3);
+#filter-text-input:focus,
+#filter-text-input:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 4px 24px rgba(0, 0, 0, 0.1);
   border: none;
   outline: transparent;
 }
 
-#filter-form input[type=submit] {
+#filter-button {
   border: transparent;
-  background-color: #81c784;
-  color: #fff;
+  background-color:#fff;
+  color: #000;
+  background-image: url(../../icons/search.svg);
+  background-repeat: no-repeat;
+  background-position:center;
+  background-size: 24px;
+  font-size: 0;
   width: 48px;
+  height: 48px;
+  position: absolute;
+  right: 16px;
 }

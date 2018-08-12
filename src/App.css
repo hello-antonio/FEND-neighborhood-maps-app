@@ -6,7 +6,7 @@
 }
 
 .app__header {
-  position: fixed;
+  position: relative;
   left: 0;
   right: 0;
   top: 0;
@@ -15,7 +15,7 @@
   height: 48px;
   line-height: 48px;
   z-index: 1010;
-  box-shadow: 0 4px 30px rgba(129, 199, 132, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
 .app__menu-btn {
@@ -26,10 +26,15 @@
 .app__menu-btn-open{
   height: 48px;
   width: 48px;
-  background-color: #81c784;
+  background-color: #fff;
   border: none;
   outline: none;
   color: #fff;
+  background-image: url(./icons/hamburger.svg);
+  background-repeat: no-repeat;
+  background-position:center;
+  background-size: 24px;
+  font-size: 0;
   display: block;
 }
 
