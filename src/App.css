@@ -59,3 +59,22 @@
   margin: auto;
   text-align: center;
 }
+
+.refresh-icon{
+  height: 48px;
+  width: 48px;
+  background-color: #fff;
+  border: none;
+  outline: none;
+  color: #000;
+  background-image: url(./icons/refresh.svg);
+  background-repeat: no-repeat;
+  background-position:center;
+  background-size: 24px;
+  font-size: 0;
+  display: block;
+  cursor: pointer;
+  margin: 0 8px;
+  border-radius: 8px;
+  background-color: #ddd;
+}

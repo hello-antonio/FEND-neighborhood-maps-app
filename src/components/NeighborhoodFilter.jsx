@@ -16,7 +16,7 @@ class NeighborhoodFilter extends Component {
     return (
       <div className="neighborhood__filter">
         <form action="" className="neighborhood__filter__form" id="filter-form" onSubmit={this.formSubmit}>
-          <input aria-label="filter by name of place or address" type="search" name="search" id="filter-text-input" onChange={onFilterList} placeholder="Filter by place or location" maxLength="48" minLength="1" size="48" />
+          <input aria-label="filter by name of place or address" type="search" name="search" id="filter-text-input" onChange={onFilterList} placeholder="Find places by name or location?" maxLength="48" minLength="1" size="48" />
           <div id="filter-button"/>
         </form>
       </div>

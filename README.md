@@ -1,4 +1,5 @@
 # FEND: Final Project - Neighborhood Map
+![app skeleton](neighborhood-app.png "App skeleton")
 
 #### About the project
 The app displays a map of the most popular/trending parks/recreational places in the bay area: water, theme parks, trailings, camping, summer camps, lake parks, beaches, forest parks.
@@ -39,7 +40,7 @@ src/
 │   ├── NeighborhoodListItem.jsx
 │   ├── NeighborhoodList.jsx
 │   └── NeighborhoodMap.jsx
-├── LeafletFontsAPI.js
+├── GoogleFontsAPI.js
 ├── icons
 │   ├── filter.svg
 │   ├── hamburger.svg
@@ -52,9 +53,6 @@ src/
 
 ### TODO
 - ~~Create app components structure/flow~~
-
-![app skeleton](NEIGBORHOOD-PROTOTYPE.png "App skeleton")
-
 - ~~How Leaflet Maps work in react???~~
 - ~~How to handle componets states data from third party apis?~~
 - ~~Control states and lifecycles???~~
@@ -64,7 +62,7 @@ service workers~~
 
 #### How to build Production
 
-- Build project `npm run build` then open browser at `http://localhost:8000`
+- Build project `npm run build` then open the browser at the port assigned by the server (it might be different) `http://localhost:5000`
 
 #### About APIs
 

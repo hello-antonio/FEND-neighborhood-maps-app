@@ -12,7 +12,8 @@ class NeighborhoodApp extends Component {
 
   state = {
     filter: "",
-    activeId: ""
+    activeId: "",
+    currentCategory:"All"
   }
 
    // do something when the element is click or mouse hovers
@@ -26,30 +27,54 @@ class NeighborhoodApp extends Component {
      // console.log(e.currentTarget.id);
      this.setState({activeId:e.currentTarget.id});
   }
-
-  filterList = (event)=>{
+  // query the list
+  handleListFilter = (event)=>{
     event.preventDefault();
     this.setState({filter:event.target.value.toLowerCase().trim()});
+  }
+  // use filter to update data for a given query. Currently this search works
+  // to look for places name and formatted address street, city, zipcodes
+  updateList = (data)=>{
+    return data.filter((item)=>{
+      return item.venue.name.toLowerCase()
+        .search(this.state.filter) > -1 || item.venue.location.formattedAddress
+        .toLocaleString()
+        .toLowerCase()
+        .search(this.state.filter) > -1;
+    });
+  }
+
+  // set category when item gets click it would update the list and the maps markers
+  handleFilterCategory = (e)=>{
+    e.preventDefault();
+    this.setState({currentCategory:e.target.innerText});
+  }
+
+  // filter data by category
+  filterListByCategory = (data, category) =>{
+    if(category === "All") return data;
+    return data.filter(place=>{
+      return place.venue.categories[0].name === category;
+    });
   }
 
   render() {
     const {data, toggleSidebar} = this.props;
-    const updateList = (data)=>{
-      return data.filter((item)=>{
-        return item.venue.name.toLowerCase()
-          .search(this.state.filter) > -1 || item.venue.location.formattedAddress
-          .toLocaleString()
-          .toLowerCase()
-          .search(this.state.filter) > -1;
-      });
-    }
 
     return (
       <div className="neighborhood">
         {/* Here goes the Finder component */}
-        <NeighborhoodFinder handleListItemEvents={this.handleListItemEvents} filterList={this.filterList} data={updateList(data)} toggleSidebar={toggleSidebar}/>
+        <NeighborhoodFinder
+          handleListItemEvents={this.handleListItemEvents}
+          handleListFilter={this.handleListFilter}
+          handleFilterCategory={this.handleFilterCategory}
+          data={this.filterListByCategory(this.updateList(data), this.state.currentCategory)}
+          toggleSidebar={toggleSidebar}/>
         {/* Here goes the Map component */}
-        <NeighborhoodMap data={updateList(data)} activeId={this.state.activeId} toggleSidebar={toggleSidebar}/>
+        <NeighborhoodMap
+          data={this.filterListByCategory(this.updateList(data), this.state.currentCategory)}
+          activeId={this.state.activeId}
+          toggleSidebar={toggleSidebar}/>
       </div>
     );
   }

@@ -6,34 +6,30 @@ import PropTypes from 'prop-types';
 class NeighborhoodList extends Component {
 
   static propTypes = {
-    data: PropTypes.array,
-    handleListItemEvents: PropTypes.func.isRequired
+    data: PropTypes.array.isRequired,
+    handleListItemEvents: PropTypes.func.isRequired,
+    handleFilterCategory: PropTypes.func.isRequired
   }
 
   state = {
-    currentCategory: "All",
     toggleFilter: false
   }
-  // just change category when li is clicked
-  handleClick = (e)=>{
-    e.preventDefault();
-    this.setState({currentCategory:e.target.innerText});
-  }
+
   // handle filter toggle
   handleFilterToggle = (e)=>{
     e.preventDefault();
     this.setState({toggleFilter:!this.state.toggleFilter});
   }
-  // pass in the data and category, returns data filtered by caregory selection
-  filterListByCategory = (data, category) =>{
-    if(category === "All") return data;
-    return data.filter(place=>{
-      return place.venue.categories[0].name === category;
-    });
+
+  // update state
+  shouldComponentUpdate(nextState, nextProps){
+    if(this.state.currentCategory !== nextState.currentCategory) return true;
+    if(this.props.data !== nextProps.data) return true;
+    return false;
   }
 
   render() {
-    const {data, handleListItemEvents} = this.props;
+    const {data, handleListItemEvents, handleFilterCategory} = this.props;
     const CountListItems = ()=>{
       return (
         <p className="neighborhood__list__counter">Total Results <strong>{data.length}</strong></p>
@@ -56,7 +52,7 @@ class NeighborhoodList extends Component {
           <ul className="categories-list" style={{display: this.state.toggleFilter ? 'block': 'none'}}>
             {
               newCategoriesSet.map((item, id) => (
-                <li className="categories-list__item" onClick={this.handleClick} key={id}>{item}</li>
+                <li className="categories-list__item" onClick={handleFilterCategory} key={id}>{item}</li>
               ))
             }
           </ul>
@@ -71,8 +67,10 @@ class NeighborhoodList extends Component {
           {/* Here goes the Item component */}
           {
             data && data.length > 0 ?
-              this.filterListByCategory(data, this.state.currentCategory).map((place) => (
-                <NeighborhoodListItem key={place.id} venue={place.venue} onUserInteraction={handleListItemEvents}/>
+              data.map((place) => (
+                <NeighborhoodListItem
+                  key={place.id} venue={place.venue}
+                  onUserInteraction={handleListItemEvents}/>
               ))
             : <p style={{
               fontWeight: 'bold',

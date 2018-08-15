@@ -6,13 +6,14 @@ import PropTypes from 'prop-types';
 
 class NeighborhoodFinder extends Component {
   static propTypes = {
-    data : PropTypes.array,
-    filterList: PropTypes.func.isRequired ,
-    handleListItemEvents: PropTypes.func.isRequired ,
+    data : PropTypes.array.isRequired,
+    handleListFilter: PropTypes.func.isRequired,
+    handleListItemEvents: PropTypes.func.isRequired,
+    handleFilterCategory: PropTypes.func.isRequired,
     toggleSidebar: PropTypes.bool.isRequired
   }
   render() {
-    const {data, filterList, handleListItemEvents, toggleSidebar} = this.props;
+    const {data, handleListFilter, handleListItemEvents, toggleSidebar, handleFilterCategory} = this.props;
 
     return (
       <div className="neighborhood__finder" style={{
@@ -20,9 +21,12 @@ class NeighborhoodFinder extends Component {
         transform:`${toggleSidebar ? 'translateX(0)': 'translateX(-100%)'}`
       }}>
         {/* Here goes the Filter component */}
-        <NeighborhoodFilter onFilterList={filterList}/>
+        <NeighborhoodFilter onFilterList={handleListFilter}/>
         {/* Here goes the List component */}
-        <NeighborhoodList handleListItemEvents={handleListItemEvents} data={data}/>
+        <NeighborhoodList
+          handleFilterCategory={handleFilterCategory}
+          handleListItemEvents={handleListItemEvents}
+          data={data}/>
       </div>
     );
   }
