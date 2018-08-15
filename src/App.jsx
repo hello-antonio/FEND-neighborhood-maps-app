@@ -39,7 +39,7 @@ class App extends Component {
       .then(res => {
         // network response ok then return response
         // convert response to json and set data to neighborhoods state array
-        if(res.ok || res.status !== 404) {
+        if(res.ok) {
           this.successCallback();
           return res;
         } else {
@@ -93,7 +93,7 @@ class App extends Component {
 
         {
           requestFail ?
-            <p className="flex-align-center">
+            <p className="flex-align-center flex-col">
               <button className="refresh-icon" onClick={this.reloadApp}>RELOAD</button>
               <span>
               Ay caramba, services are offline.

@@ -43,13 +43,17 @@ class NeighborhoodMap extends Component {
       this.map.remove();
     }
     this.layer = L.layerGroup().addTo(this.map);
-    this.updateMarkers({markers:this.props.data, activeId: this.props.activeId});
+    this.updateMap();
     this.setMarkers(this.props.data);
+  }
+  // update map when data changes
+  updateMap = ()=>{
+    this.updateMarkers({markers:this.props.data, activeId: this.props.activeId});
   }
 
   componentDidUpdate({data}){
     if (this.props.data !== data) {
-      this.updateMarkers({markers:this.props.data, activeId: this.props.activeId});
+      this.updateMap();
     }
   }
 
@@ -58,7 +62,7 @@ class NeighborhoodMap extends Component {
     // open popup
     markers.forEach(marker => {
       const markerId = marker.options.id;
-      return markerId === activeId ? marker.openPopup() : null
+      if (markerId === activeId) return marker.openPopup();
     });
   }
 
