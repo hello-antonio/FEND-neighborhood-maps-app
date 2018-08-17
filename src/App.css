@@ -6,7 +6,7 @@
 }
 
 .app__header {
-  position: relative;
+  position: fixed;
   left: 0;
   right: 0;
   top: 0;
@@ -82,4 +82,12 @@
   margin: 1rem;
   border-radius: 8px;
   background-color: #ddd;
+}
+
+.message-loading-app {
+  text-align: center;
+  max-width: 425px;
+  padding: 1em;
+  font-size: 1.222em;
+  color: #0000df;
 }

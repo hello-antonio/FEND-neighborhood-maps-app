@@ -72,12 +72,7 @@ class NeighborhoodList extends Component {
                   key={place.id} venue={place.venue}
                   onUserInteraction={handleListItemEvents}/>
               ))
-            : <p style={{
-              fontWeight: 'bold',
-              color: 'grey',
-              textAlign: 'center',
-              padding: '2em 1em'
-            }}>Uhmm, I don't know that place, try another...</p>
+            : <p className="message-not-found">Sorry, I don't know that place, try another...</p>
           }
         </ol>
       </div>

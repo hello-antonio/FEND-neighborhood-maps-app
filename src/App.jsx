@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import './App.css';
 import NeighborhoodApp from './components/NeighborhoodApp';
+import AppHeader from './AppHeader';
 
 class App extends Component {
   state = {
@@ -23,15 +24,13 @@ class App extends Component {
   }
   // Start fetching data api, sets the state for neighborhoods data.
   fetchNeighborhoods = ()=>{
-    const API_URL = 'https://api.foursquare.com/v2/';
-    const CLIENT_ID = 'FHJV0JMJ3VIYXT0ZDH4KOXVRPCIX1BZMJ5QX0VPA2TFGGNTO';
-    const CLIENT_SECRET = 'NK0F0Z2142NYU25V25BUXVWQS2DPTCVF3OOF0X54L3SKZQL2';
-    const FETCH_API = `${API_URL}lists/508946515/parks-and-recreations?limit=25&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&v=20180731`;
+    const FETCH_API = `http://localhost:3000/foursquareAPI.json`;
       // fetch any api required url and credentials (if any) for your service
       // modify the options method, header to comply with the request
       // catch any error
       fetch(FETCH_API, {
         method:"GET",
+        mode: 'cors',
         header:{
           "Content-Type":'application/json'
         }
@@ -57,7 +56,7 @@ class App extends Component {
   reloadApp = ()=>{
     window.location.reload();
   }
-  // toogle sidebar
+  // toggle sidebar
   handleSidebarToggle = ()=> {
     this.setState({toggleSidebar:!this.state.toggleSidebar});
   }
@@ -72,25 +71,12 @@ class App extends Component {
 
   render() {
     const {neighborhoods, isLoading, requestFail, toggleSidebar} = this.state;
-    const Header = ()=>{
-      return (
-        <header className="app__header">
-          <div className="app__menu-btn">
-            <button type="button" value="open" className="app__menu-btn-open" onClick={this.handleSidebarToggle}>MENU</button>
-          </div>
-          <div className="app__title">
-            <h1 className="app__logo">Parks and Recreations</h1>
-          </div>
-        </header>
-      )
-    }
+
     return (
       <div className='app'>
         {/* Header */}
-        <Header/>
+        <AppHeader handleSidebarToggle={this.handleSidebarToggle}/>
         {/* Neighborhood consumes api data */}
-
-
         {
           requestFail ?
             <p className="flex-align-center flex-col">
@@ -101,8 +87,10 @@ class App extends Component {
             </p>
           :
             isLoading ?
-              <p className="flex-align-center">
-                loading...
+              <p className="flex-align-center flex-col message-loading-app">
+                <strong>&quot;Early <em>maps</em> were often local, showing people where things were within a limited area.&quot;</strong>
+                <br/>
+                <strong>loading...</strong>
               </p>
             :
               <NeighborhoodApp data={neighborhoods} toggleSidebar={toggleSidebar}/>

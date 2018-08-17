@@ -1,15 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './css/NeighborhoodListItem.css';
 import PropTypes from 'prop-types';
 
-class NeighborhoodListItem extends Component {
-  static propTypes = {
-    venue: PropTypes.object.isRequired ,
-    onUserInteraction: PropTypes.func.isRequired
-  }
-
-  render() {
-    const {venue, onUserInteraction} = this.props;
+const NeighborhoodListItem = (props)=> {
+    const {venue, onUserInteraction} = props;
     return (
       <li className="neighborhood__list__item" tabIndex="0" id={venue.id} onClick={onUserInteraction} onFocus={onUserInteraction} onMouseEnter={onUserInteraction} key={venue.id}>
         <div className="venue">
@@ -26,6 +20,11 @@ class NeighborhoodListItem extends Component {
         </div>
       </li>
     );
-  }
 }
+
+NeighborhoodListItem.propType = {
+  venue: PropTypes.object.isRequired,
+  onUserInteractio: PropTypes.func.isRequired
+}
+
 export default NeighborhoodListItem;

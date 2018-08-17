@@ -10,16 +10,12 @@ class NeighborhoodFinder extends Component {
     handleListFilter: PropTypes.func.isRequired,
     handleListItemEvents: PropTypes.func.isRequired,
     handleFilterCategory: PropTypes.func.isRequired,
-    toggleSidebar: PropTypes.bool.isRequired
   }
   render() {
-    const {data, handleListFilter, handleListItemEvents, toggleSidebar, handleFilterCategory} = this.props;
+    const {data, handleListFilter, handleListItemEvents, handleFilterCategory} = this.props;
 
     return (
-      <div className="neighborhood__finder" style={{
-        opacity:`${toggleSidebar ? '1' : '0'}`,
-        transform:`${toggleSidebar ? 'translateX(0)': 'translateX(-100%)'}`
-      }}>
+      <div className={`neighborhood__finder`}>
         {/* Here goes the Filter component */}
         <NeighborhoodFilter onFilterList={handleListFilter}/>
         {/* Here goes the List component */}

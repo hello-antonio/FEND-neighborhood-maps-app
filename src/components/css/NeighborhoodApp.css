@@ -1,7 +1,17 @@
 .neighborhood{
   position: relative;
-  top: 0;
+  top: 48px;
   display: flex;
   width: 100%;
-  height:100vh;
+  height:auto;
+}
+
+.show .neighborhood__finder {
+  opacity: 1;
+  transform: translateX(0);
+  z-index: 2;
+}
+
+.show #map {
+  left: 425px;
 }

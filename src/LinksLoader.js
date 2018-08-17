@@ -1,9 +1,14 @@
-const FONTS_URL = 'https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500';
-export default function loader (){
+export function loader ({href="",integrity = "", crossorgin= ""}={}){
   return new Promise((resolve, reject)=>{
     const link = document.createElement('link');
-    link.rel = 'stylesheets';
-    link.href = FONTS_URL;
+    link.rel = 'stylesheet';
+    link.href = href;
+    // link.rel = "preload";
+    // link.as = "style";
+    if(crossorgin || integrity) {
+      link.integrity = integrity;
+      link.crossOrigin = crossorgin;
+    }
     link.onload = ()=>{
       resolve();
     }

@@ -16,18 +16,18 @@ class NeighborhoodApp extends Component {
     currentCategory:"All"
   }
 
-   // do something when the element is click or mouse hovers
-   handleListItemEvents = (e)=>{
-     /**
-      * the current target for the event, as the event traverses the DOM.
-      * It always refers to the element to which the event handler has been attached,
-      * as opposed to event.target which identifies the element on which the event occurred.
-      * So dont use target if your intent is not to target every children inside the target parent.
-      */
-     // console.log(e.currentTarget.id);
-     this.setState({activeId:e.currentTarget.id});
+  // do something when the element is click or mouse hovers
+  handleListItemEvents = (e)=>{
+    /**
+    * the current target for the event, as the event traverses the DOM.
+    * It always refers to the element to which the event handler has been attached,
+    * as opposed to event.target which identifies the element on which the event occurred.
+    * So dont use target if your intent is not to target every children inside the target parent.
+    */
+    // console.log(e.currentTarget.id);
+    this.setState({activeId:e.currentTarget.id});
   }
-  // query the list
+  // NeighborhoodFilter input
   handleListFilter = (event)=>{
     event.preventDefault();
     this.setState({filter:event.target.value.toLowerCase().trim()});
@@ -35,13 +35,18 @@ class NeighborhoodApp extends Component {
   // use filter to update data for a given query. Currently this search works
   // to look for places name and formatted address street, city, zipcodes
   updateList = (data)=>{
-    return data.filter((item)=>{
-      return item.venue.name.toLowerCase()
-        .search(this.state.filter) > -1 || item.venue.location.formattedAddress
-        .toLocaleString()
-        .toLowerCase()
-        .search(this.state.filter) > -1;
-    });
+    const regex = /[&<>"'[\]()]/g;
+    if(this.state.filter.match(regex)) {
+      return [];
+    } else {
+      return data.filter((item)=>{
+        return item.venue.name.toLowerCase()
+          .search(this.state.filter) > -1 || item.venue.location.formattedAddress
+          .toLocaleString()
+          .toLowerCase()
+          .search(this.state.filter) > -1;
+      });
+    }
   }
 
   // set category when item gets click it would update the list and the maps markers
@@ -62,7 +67,7 @@ class NeighborhoodApp extends Component {
     const {data, toggleSidebar} = this.props;
 
     return (
-      <div className="neighborhood">
+      <div className={`neighborhood ${toggleSidebar ? 'show' : ''}`}>
         {/* Here goes the Finder component */}
         <NeighborhoodFinder
           handleListItemEvents={this.handleListItemEvents}
@@ -74,7 +79,7 @@ class NeighborhoodApp extends Component {
         <NeighborhoodMap
           data={this.filterListByCategory(this.updateList(data), this.state.currentCategory)}
           activeId={this.state.activeId}
-          toggleSidebar={toggleSidebar}/>
+          />
       </div>
     );
   }
