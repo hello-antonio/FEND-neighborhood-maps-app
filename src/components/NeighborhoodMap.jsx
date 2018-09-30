@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, {
+  Component
+} from 'react';
 import './css/NeighborhoodMap.css';
 import L from 'leaflet';
 import PropTypes from 'prop-types';
@@ -10,13 +12,13 @@ class NeighborhoodMap extends Component {
   }
 
   state = {
-    center: [0,0],
+    center: [0, 0],
     zoom: 10,
     maxZoom: 16
   }
 
   // Initialize map
-  initializeMap = ()=>{
+  initializeMap = () => {
     // create a map object make sure options are set current default settings
     // are mobile friendly.
     // The map tileLayer draws a image of the map learn more by visiting this site https://leaflet-extras.github.io/leaflet-providers/preview/
@@ -27,9 +29,9 @@ class NeighborhoodMap extends Component {
       zoom: this.state.zoom,
       layers: [
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: this.state.maxZoom,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-      })
+          maxZoom: this.state.maxZoom,
+          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        })
       ],
       tap: true
     });
@@ -40,29 +42,29 @@ class NeighborhoodMap extends Component {
 
     // add markers to the map
     this.layer = L.layerGroup().addTo(this.map);
-    if(this.map === undefined) {
+    if (this.map === undefined) {
       this.map.off();
       this.map.remove();
     }
 
     // map zoom affects scrolling performance so disabled when not in use
     this.map.scrollWheelZoom.disable();
-    this.map.on('focus', ()=> this.map.scrollWheelZoom.enable());
-    this.map.on('blur', ()=> this.map.scrollWheelZoom.disable());
+    this.map.on('focus', () => this.map.scrollWheelZoom.enable());
+    this.map.on('blur', () => this.map.scrollWheelZoom.disable());
   }
 
   // trigger popup
-  triggerPopupOnMarker = (activeId, markers)=> {
+  triggerPopupOnMarker = (activeId, marker, markerID) => {
     // if activeId is equal to the marker id then
     // open popup
-    markers.forEach(marker => {
-      const markerId = marker.options.id;
-      if (markerId === activeId) return marker.openPopup();
-    });
+    if (markerID === activeId) return marker.openPopup();
   }
 
   // popup info window
-  popupContentInfo = ({name="", shortName=""}={})=>{
+  popupContentInfo = ({
+    name = "",
+    shortName = ""
+  } = {}) => {
     return `
       <p class="marker__desc"><strong>${name}</strong> <br/> ${shortName}</p>
     `;
@@ -74,67 +76,91 @@ class NeighborhoodMap extends Component {
   }
 
   // create markers
-  createMarkersLayer = ({markers=[], activeId}={})=> {
+  createMarkersLayer = ({
+    data = [],
+    activeId
+  } = {}) => {
     // clear old markers because markers data will update
     this.layer.clearLayers();
 
-    const copyMarkers = [];
+    const loadedMarkers = [];
 
     // go over data and grab each objects location
-    markers.map(marker => {
+    data.map(marker => {
 
       // get data needed for the marker lt, lng, name, category
-      const {id, location:{lat, lng}, name, categories:[{shortName}]} = marker.venue;
+      const {
+        id,
+        location: {
+          lat,
+          lng
+        },
+        name,
+        categories: [{
+          shortName
+        }]
+      } = marker.venue;
 
       // create markers
-      const _marker = L.marker([lat, lng], {id:id});
+      const _marker = L.marker([lat, lng], {
+        id: id
+      });
 
       // create a copy of the markers
-      copyMarkers.push(_marker);
+      loadedMarkers.push(_marker);
 
       // add each marker to the map layer bind the popup and click event
       // this is a nice place to add custome icons of each marker.
       return _marker.addTo(this.layer)
-                    .bindPopup(this.popupContentInfo({name, shortName}))
-                    .on('click', this.handleZoom);
+        .bindPopup(this.popupContentInfo({
+          name,
+          shortName
+        }))
+        .on('click', this.handleZoom);
     });
 
     // so here you add the popup because here the markers are ready loaded on the map
     // add any popup/info window styles. The current markers just show the place
     // name e.g Yellow Stone Park and category e.g Park, etc...
     // fuction takes an activeID and the markers array
-    this.triggerPopupOnMarker(activeId, copyMarkers);
-
+    loadedMarkers.forEach(marker=>{
+      this.triggerPopupOnMarker(activeId, marker, marker.options.id);
+    });
 
     // TODO: refactor into a function
     // push latlng
     const coords = [];
-    copyMarkers.map(marker=>{
+    loadedMarkers.map(marker => {
       return coords.push([marker.getLatLng().lat, marker.getLatLng().lng]);
     });
 
     // fit to world and set boundaries base on the markers layer
     // keep it tidy
     const bounds = L.latLngBounds(coords);
-    if(bounds.getNorthEast()) {
+    if (bounds.getNorthEast()) {
       this.map.fitBounds(bounds);
       this.map.setView(bounds.getCenter());
     }
   }
 
   // update map when data changes
-  updateMap = ()=>{
-    this.createMarkersLayer({markers:this.props.data, activeId: this.props.activeId});
+  updateMap = () => {
+    this.createMarkersLayer({
+      data: this.props.data,
+      activeId: this.props.activeId
+    });
   }
 
-  componentDidMount(){
+  componentDidMount() {
     // create map
     this.initializeMap();
     // get current map markers
     this.updateMap();
   }
 
-  componentDidUpdate({data}){
+  componentDidUpdate({
+    data
+  }) {
     // if add new markers update map
     if (this.props.data !== data) {
       this.updateMap();
@@ -146,15 +172,15 @@ class NeighborhoodMap extends Component {
     if (this.props.data !== nextProps.data || this.props.activeId !== nextProps.activeId) {
       return true;
     }
-    if(this.state.center !== nextState.center) {
+    if (this.state.center !== nextState.center) {
       return true;
     }
     return false;
   }
 
   render() {
-    return (
-      <div id="map"/>
+    return ( <
+      div id = "map" / >
     );
   }
 }

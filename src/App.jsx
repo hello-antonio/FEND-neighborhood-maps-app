@@ -24,7 +24,7 @@ class App extends Component {
   }
   // Start fetching data api, sets the state for neighborhoods data.
   fetchNeighborhoods = ()=>{
-    const FETCH_API = `http://localhost:3000/foursquareAPI.json`;
+    const FETCH_API = `${window.location.origin}/foursquareAPI.json`;
       // fetch any api required url and credentials (if any) for your service
       // modify the options method, header to comply with the request
       // catch any error
